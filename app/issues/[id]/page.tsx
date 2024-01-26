@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import ReactMarkdown from "react-markdown";
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
+import delay from "delay";
 
 interface Props {
     params: { id: string };
@@ -12,7 +13,7 @@ const IssueDetailPage = async ({ params }: Props) => {
     const issue = await prisma.issue.findUnique({
         where: { id: params.id },
     });
-
+    await delay(2000);
     if (!issue) notFound();
 
     return (
@@ -22,7 +23,7 @@ const IssueDetailPage = async ({ params }: Props) => {
                 <IssueStatusBadge status={issue.status} />
                 <Text>{issue?.createdAt.toDateString()}</Text>
             </Flex>
-            <Card className="prose">
+            <Card className="prose" mt="4">
                 <ReactMarkdown>{issue?.description}</ReactMarkdown>
             </Card>
         </div>
