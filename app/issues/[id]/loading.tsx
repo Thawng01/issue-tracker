@@ -2,7 +2,7 @@ import { Box, Flex } from "@radix-ui/themes";
 import React from "react";
 import { Skeleton } from "@/app/components";
 
-const Loading = () => {
+const loading = () => {
     return (
         <Box className="max-w-xl">
             <Skeleton />
@@ -17,4 +17,4 @@ const Loading = () => {
     );
 };
 
-export default Loading;
+export default loading;
