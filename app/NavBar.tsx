@@ -7,7 +7,7 @@ import { BsBugFill } from "react-icons/bs";
 
 const links = [
     { label: "Dashboard", href: "/" },
-    { label: "Issues", href: "/issues" },
+    { label: "Issues", href: "/issues/list" },
 ];
 const NavBar = () => {
     const currentPath = usePathname();
