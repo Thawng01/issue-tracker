@@ -5,7 +5,15 @@ import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import { BsBugFill } from "react-icons/bs";
 import { useSession } from "next-auth/react";
-import { Box, Container, Flex } from "@radix-ui/themes";
+import {
+    Avatar,
+    Box,
+    Container,
+    DropdownMenu,
+    DropdownMenuItem,
+    Flex,
+    Text,
+} from "@radix-ui/themes";
 
 const links = [
     { label: "Dashboard", href: "/" },
@@ -18,7 +26,7 @@ const NavBar = () => {
     return (
         <nav className=" px-6 py-3 border-b">
             <Container>
-                <Flex justify="between">
+                <Flex justify="between" align="center">
                     <Flex gap="5">
                         <Link href="/">
                             <BsBugFill className="text-2xl" />
@@ -47,7 +55,29 @@ const NavBar = () => {
 
                     <Box>
                         {status === "authenticated" && (
-                            <Link href="/api/auth/signout">Logout</Link>
+                            <DropdownMenu.Root>
+                                <DropdownMenu.Trigger>
+                                    <Avatar
+                                        src={session.user?.image!}
+                                        fallback="?"
+                                        size="2"
+                                        radius="full"
+                                        className="cursor-pointer"
+                                    />
+                                </DropdownMenu.Trigger>
+                                <DropdownMenu.Content>
+                                    <DropdownMenu.Label>
+                                        <Text size="4">
+                                            {session.user?.email}
+                                        </Text>
+                                    </DropdownMenu.Label>
+                                    <DropdownMenuItem>
+                                        <Link href="/api/auth/signout">
+                                            Logout
+                                        </Link>
+                                    </DropdownMenuItem>
+                                </DropdownMenu.Content>
+                            </DropdownMenu.Root>
                         )}
                         {status === "unauthenticated" && (
                             <Link href="/api/auth/signin">Login</Link>
