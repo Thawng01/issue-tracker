@@ -8,7 +8,7 @@ import { Container, Theme } from "@radix-ui/themes";
 
 import NavBar from "./NavBar";
 import AuthProvider from "./auth/AuthProvider";
-import QueryProvider from "./query/QueryProvider";
+import QueryProvider from "./query/ClientQueryProvider";
 
 const inter = Inter({
     subsets: ["latin"],
