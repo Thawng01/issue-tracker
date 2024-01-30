@@ -23,21 +23,22 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 
     if (error) return null;
 
+    const handleChange = (userId: string | null) => {
+        const assignedUserId = userId === "unassigned" ? null : userId;
+        axios
+            .patch("/aspi/issues/" + issue.id, {
+                assignedUserId,
+            })
+            .catch(() => {
+                toast.error("Changes couldn't be saved.");
+            });
+    };
+
     return (
         <>
             <Select.Root
                 defaultValue={issue.assignedUserId || "unassigned"}
-                onValueChange={(userId) => {
-                    const assignedUserId =
-                        userId === "unassigned" ? null : userId;
-                    axios
-                        .patch("/aspi/issues/" + issue.id, {
-                            assignedUserId,
-                        })
-                        .catch(() => {
-                            toast.error("Changes couldn't be saved.");
-                        });
-                }}
+                onValueChange={handleChange}
             >
                 <Select.Trigger placeholder="Assign..." />
                 <Select.Content>
