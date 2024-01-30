@@ -14,9 +14,9 @@ interface Props {
 
 const IssuesPage = async ({ searchParams }: Props) => {
     const columns: {
-        label: String;
+        label: string;
         value: keyof Issue;
-        className?: String;
+        className?: string;
     }[] = [
         { label: "Issue", value: "title" },
         {
@@ -58,7 +58,10 @@ const IssuesPage = async ({ searchParams }: Props) => {
                     <Table.Row>
                         {columns.map((column) => {
                             return (
-                                <Table.ColumnHeaderCell key={column.value}>
+                                <Table.ColumnHeaderCell
+                                    key={column.value}
+                                    className={column.className}
+                                >
                                     <Link
                                         href={{
                                             query: {
@@ -87,7 +90,9 @@ const IssuesPage = async ({ searchParams }: Props) => {
                                 >
                                     {issue.title}
                                     <div className="block md:hidden">
-                                        {issue.status}
+                                        <IssueStatusBadge
+                                            status={issue.status}
+                                        />
                                     </div>
                                 </Link>
                             </Table.Cell>
