@@ -1,4 +1,5 @@
-This is a issue tracker web app developed using Nextjs. [https://issue-tracker-ebon-nine.vercel.app/](Demo)
+This is a issue tracker web app developed using Nextjs.
+See demo : [https://issue-tracker-ebon-nine.vercel.app/](https://issue-tracker-ebon-nine.vercel.app/)
 
 ## Getting Started
 
