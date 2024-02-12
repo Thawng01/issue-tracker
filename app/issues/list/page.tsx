@@ -1,15 +1,17 @@
-import React from "react";
-import { Flex, Table } from "@radix-ui/themes";
+import React, { Suspense } from "react";
+import { Flex } from "@radix-ui/themes";
 
 import prisma from "@/prisma/client";
-import IssueStatusBadge from "../../components/IssueStatusBadge";
 import IssueActions from "./IssueActions";
-import Link from "next/link";
-import { Issue, Status } from "@prisma/client";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
+import { Status } from "@prisma/client";
 import Pagination from "@/app/components/Pagination";
 import IssueTable, { IssueQuery, columnName } from "./IssueTable";
 import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Issue Tracker - Issues List",
+    description: "View all issues",
+};
 
 interface Props {
     searchParams: IssueQuery;
@@ -42,18 +44,15 @@ const IssuesPage = async ({ searchParams }: Props) => {
         <Flex direction="column" gap="4">
             <IssueActions />
             <IssueTable issues={issues} searchParams={searchParams} />
-            <Pagination
-                currentPage={page}
-                itemCount={issueCount}
-                pageSize={pageSize}
-            />
+            <Suspense>
+                <Pagination
+                    currentPage={page}
+                    itemCount={issueCount}
+                    pageSize={pageSize}
+                />
+            </Suspense>
         </Flex>
     );
 };
 
 export default IssuesPage;
-
-export const metadata: Metadata = {
-    title: "Issue Tracker - Issues List",
-    description: "View all issues",
-};
